@@ -1,0 +1,15 @@
+body {
+
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Debugging */
+div {
+	outline-color: orange;
+	border: 2px dotted red;
+	padding: 20px;
+	margin-bottom: 10px;
+}

@@ -3,13 +3,79 @@
 <head>
 	
 	<meta charset="UTF-8">
-    <title>jQuery Calculator</title>
+    <title>jQuery | Avengers RPG Game</title>
+
+	<!-- Link to reset CSS file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Link to custom CSS file -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <!-- Added link to the jQuery Library -->
     <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body> 
+
+	<header id = "masthead">
+		
+		<div class = "container">
+			<h1> Avengers RPG Game </h1>
+		</div>
+
+	</header>
+
+	<div id = "main-container" class="container">
+
+		<div id = "characters">
+		<button id = "char1" class="character">
+			<img src = "" alt= "captain america image">
+			<p class = "healthpoints">Health points</p>
+		</button>
+		<button id = "char2" class="character">
+			<img src = "" alt= "thor image">
+			<p class = "healthpoints">Health points</p>
+		</button>
+		<button id = "char3" class="character">
+			<img src = "" alt= "hulk image">
+			<p class = "healthpoints">Health points</p>
+		</button>
+		<button id = "char4" class="character">
+			<img src = "" alt= "ironman image">
+			<p class = "healthpoints">Health points</p>
+		</button>
+		<button id = "char5" class="character">
+			<img src = "" alt= "blackwidow image">
+			<p class = "healthpoints">Health points</p>
+		</button>
+				
+		</div>
+
+		<div id = "yourchar">
+
+			<h2> Your Character </h2>		
+		</div>
+
+		<div id = "enemies">
+
+			<h2> Enemies Available To Attack </h2>		
+		</div>
+
+		<div id = "fight">
+
+			<h2> Fight Section </h2>
+			<button id = "attack">Attack</button>	
+
+		</div>
+
+		<div id = "defender">
+
+			<h2> Defender </h2>		
+		</div>
+
+
+	</div>
+
 
 	<!-- Link to JavaScript file -->
     <script src="assets/javascript/game.js"></script>

@@ -291,8 +291,8 @@ function performAttack(){
 		isDefeated = true;
 	}
 	else{
-		$("#message").append("<p> You attacked " + enemy + " for " + youAttackpow + " damage.</p>"); 
-		$("#message").append("<p> enemy attacked you back for" + enemyAttackPow + " damage.</p>"); 
+		$("#message").append("<p> You attacked " + enemy + " for  " + youAttackpow + "  damage.</p>"); 
+		$("#message").append("<p> " + enemy + " attacked you back for  " + enemyAttackPow + "  damage.</p>"); 
 	}
 	//$("#message").html("hello");
 

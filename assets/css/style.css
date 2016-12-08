@@ -1,15 +1,43 @@
+html { 
+  background: url("../images/Avengers-panel.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+h1{
+	font-size: 36px;
+	color:  #cc3300;
+	text-align: center;
+	font-family: 'Bungee', cursive;
+}
+h2{
+	font-size: 26px;
+	/* font-family: 'Ropa Sans', sans-serif; */
+	font-family: 'Bangers', cursive;
+}
+#message {
+	font-size: 20px;
+	color: white;
+	font-family: 'Oswald', sans-serif;
+}
 body {
+	
 
 }
 
 * {
 	box-sizing: border-box;
 }
+.character img {
+	width: 100px;
+	height: 120px;
+}
 
 /* Debugging */
 div {
 	outline-color: orange;
 	border: 2px dotted red;
-	padding: 20px;
+	padding: 10px;
 	margin-bottom: 10px;
 }

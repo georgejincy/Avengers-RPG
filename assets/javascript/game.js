@@ -28,12 +28,17 @@ function GameCharacter(healthPoints, attackPower, counterAttackPow, isYou, charN
 
 	this.updHealthPoints = function (attackPow){
 		this.healthPoints = this.healthPoints - attackPow;
+		return this.healthPoints;
+		//$("p.healthpoints").html(this.healthPoints);
 	};
 
 	this.checkHealth = function (){
 		if (this.healthPoints <= 0){
 			console.log("Defeated");
 			return true;
+		}
+		else{
+			return false;
 		}
 	}
 
@@ -51,24 +56,27 @@ function GameCharacter(healthPoints, attackPower, counterAttackPow, isYou, charN
 // MAIN PROCESS (THIS IS THE CODE THAT CONTROLS WHAT IS ACTUALLY RUN)
 // ==================================================================================================
 
+var namesarray = ["capAmerica","thor","hulk","ironMan","blackWidow"];
+var hpArray = [150,180,200,130,120];
+
 // array that stores defaults for game characters
 var charDefArray = [
-					{name: "capAmerica", healthP: 150, apower: 25, capower: 30},
-					{name: "thor", healthP: 180, apower: 40, capower: 50},
-					{name: "hulk", healthP: 200, apower: 50, capower: 60},
-					{name: "ironMan", healthP: 130, apower: 45, capower: 40},
-					{name: "blackWidow", healthP: 120, apower: 35, capower: 55}
+					{name: "capAmerica", healthP: 150, apower: 5, capower: 30},
+					{name: "thor", healthP: 180, apower: 12, capower: 20},
+					{name: "hulk", healthP: 200, apower: 15, capower: 25},
+					{name: "ironMan", healthP: 130, apower: 14, capower: 15},
+					{name: "blackWidow", healthP: 120, apower: 5, capower: 10}
 ];
 
 
 //create an array of game character objects
 
 var charArray = [
-				new GameCharacter(150, 25, 30, false, "capAmerica"),
-				new GameCharacter(180, 40, 50, false, "thor"),
-				new GameCharacter(200, 50, 60, false, "hulk"),
-				new GameCharacter(130, 45, 40, false, "ironMan"),
-				new GameCharacter(120, 35, 55, false, "blackWidow")];
+				new GameCharacter(150, 5, 30, false, "capAmerica"),
+				new GameCharacter(180, 12, 20, false, "thor"),
+				new GameCharacter(200, 15, 25, false, "hulk"),
+				new GameCharacter(130, 14, 15, false, "ironMan"),
+				new GameCharacter(120, 5, 10, false, "blackWidow")];
 
 /*var capAmerica = new GameCharacter(150, 25, 30, true);
 var thor = new GameCharacter(180, 40, 50, false);
@@ -87,14 +95,17 @@ $("button").on("click", function(){
 		you = $(this).val();
 		moveCharacters($(this).val());
 	}
-	/*if($(this).hasClass("enemies")){
-		console.log("An enemy has been clicked!");
-		console.log("enemy is: " + $(this).val());
-		moveCharToDef($(this).val());
-	}*/
 	else if($(this).hasClass("attack")){
 		console.log("Attack button has been clicked");
-		performAttack();
+
+		if ($("#defender").children().length === 0) {
+			//div has no other tags inside it
+			console.log("EMPTY");
+			$("#message").html("No enemy chosen here.");
+		}
+		else{
+			performAttack();
+		}
 
 	}
 
@@ -191,7 +202,12 @@ function moveCharToDef(charName){
 }
 
 function createCharButton(charName){
-	var charButton = $("<button><img src = '' alt=" + charName + "><p class = 'healthpoints'>Health points</p></button>"); 
+	//get healthpoints from hparray
+	var n = namesarray.indexOf(charName);
+	if(n > -1){
+	var healthpnts = hpArray[n];
+	}
+	var charButton = $("<button><img src = '' alt=" + charName + "><p class = 'healthpoints'>" + healthpnts + "</p></button>"); 
 	//$(".img").attr("alt", " image");
 	charButton.addClass("." + charName);
 	charButton.val(charName);
@@ -224,30 +240,34 @@ function performAttack(){
 	for (var i = 0; i < charArray.length; i++) {
 		//capAmerica.updAttackPow();
 		if(charArray[i].charName === you){
-			charArray[i].updHealthPoints(enemyAttackPow);
+			var hp = charArray[i].updHealthPoints(enemyAttackPow);
 			charArray[i].updAttackPow();
+			$("button.yourChar > p.healthpoints").html(hp);
 			isYouDefeated = charArray[i].checkHealth();
 
 		}
 		else if(charArray[i].charName === enemy){
-			charArray[i].updHealthPoints(youAttackpow);
+			var hp = charArray[i].updHealthPoints(youAttackpow);
+			$("button.defender > p.healthpoints").html(hp);
 			isEnemyDefeated = charArray[i].checkHealth();
 		}
 
 		//Testing/Debugging
 		console.log(charArray[i]);
 	}
+	console.log(isYouDefeated);
+	console.log(isEnemyDefeated);
 
 
 	//update the message div
-	if (isYouDefeated === true){
-		$("#message").append("<p> You've been defeated...GAME OVER! </p>");
-		$("#message").append("<button id='restart'> Restart </button>");
-
+	if(isEnemyDefeated === true){
+		$("#message").append("<p> You have defeated " + enemy +",you can choose to fight another enemy.</p>");
+		$("#defender").html("");
 
 	}
-	else if(isEnemyDefeated === true){
-
+	else if (isYouDefeated === true){
+		$("#message").append("<p> You've been defeated...GAME OVER! </p>");
+		$("#message").append("<button id='restart'> Restart </button>");
 	}
 	else{
 		$("#message").append("<p> You attacked " + enemy + " for " + youAttackpow + " damage.</p>"); 

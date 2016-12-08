@@ -2,6 +2,7 @@
 // ==================================================================================================
 var you = "";
 var enemy = "";
+var isDefeated = false;
 
 //OBJECT
 //===================================================================================================
@@ -104,7 +105,10 @@ $("button").on("click", function(){
 			$("#message").html("No enemy chosen here.");
 		}
 		else{
-			performAttack();
+			console.log(isDefeated);
+			if(isDefeated === false){
+				performAttack();
+			}
 		}
 
 	}
@@ -122,12 +126,18 @@ $("#enemies").on("click", "button", function(){
 		console.log("character is: " + $(this).val());
 		moveCharacters($(this).val());
 	}*/
-	if($(this).hasClass("enemies")){
-		console.log("An enemy has been clicked!");
-		console.log("enemy is: " + $(this).val());
-		enemy = $(this).val();
-		moveCharToDef($(this).val());
-		$(this).remove();
+	//move enemies to defender only if defender section is empty
+	if ($("#defender").children().length === 0) {
+		if($(this).hasClass("enemies")){
+			console.log("An enemy has been clicked!");
+			console.log("enemy is: " + $(this).val());
+			enemy = $(this).val();
+			moveCharToDef($(this).val());
+			$(this).remove();
+		}
+	}
+	else{
+		$("#message").html("You have already chosen an enemy. Click attack to play");
 	}
 
 	console.log("I'm at end of on click");
@@ -144,6 +154,7 @@ $("#message").on("click", "button", function(){
 	$("#enemies").html("");
 	$("#defender").html("");
 	$("#message").html("");
+	isDefeated = false;
 
 	//reset the properties of gamecharacter
 
@@ -261,13 +272,23 @@ function performAttack(){
 
 	//update the message div
 	if(isEnemyDefeated === true){
-		$("#message").append("<p> You have defeated " + enemy +",you can choose to fight another enemy.</p>");
-		$("#defender").html("");
+		//If all enemies defeated display Won message and restart button
+		if ($("#enemies").children().length === 0) {
+			console.log("Enemies EMPTY!");
+			$("#message").append("<p> You Won...GAME OVER! </p>");
+			$("#message").append("<button id='restart'> Restart </button>");
+			isDefeated = true;
+		}
+		else{
+			$("#message").append("<p> You have defeated " + enemy +",you can choose to fight another enemy.</p>");
+			$("#defender").html("");
+		}
 
 	}
 	else if (isYouDefeated === true){
 		$("#message").append("<p> You've been defeated...GAME OVER! </p>");
 		$("#message").append("<button id='restart'> Restart </button>");
+		isDefeated = true;
 	}
 	else{
 		$("#message").append("<p> You attacked " + enemy + " for " + youAttackpow + " damage.</p>"); 

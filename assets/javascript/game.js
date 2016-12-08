@@ -59,6 +59,12 @@ function GameCharacter(healthPoints, attackPower, counterAttackPow, isYou, charN
 
 var namesarray = ["capAmerica","thor","hulk","ironMan","blackWidow"];
 var hpArray = [150,180,200,130,120];
+var imgArray = [
+				"assets/images/capamerica.jpg",
+				"assets/images/thor.jpg",
+				"assets/images/hulk.jpg",
+				"assets/images/ironman.jpg",
+				"assets/images/blkwidow.jpg"];
 
 // array that stores defaults for game characters
 var charDefArray = [
@@ -217,8 +223,9 @@ function createCharButton(charName){
 	var n = namesarray.indexOf(charName);
 	if(n > -1){
 	var healthpnts = hpArray[n];
+	var charImg = imgArray[n];
 	}
-	var charButton = $("<button><img src = '' alt=" + charName + "><p class = 'healthpoints'>" + healthpnts + "</p></button>"); 
+	var charButton = $("<button><p>" + charName + "</p><img src = " + charImg +" alt=" + charName + "><p class = 'healthpoints'>" + healthpnts + "</p></button>"); 
 	//$(".img").attr("alt", " image");
 	charButton.addClass("." + charName);
 	charButton.val(charName);

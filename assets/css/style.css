@@ -51,8 +51,8 @@ body {
 
 /* Debugging */
 div {
-	/* outline-color: orange;
-	border: 2px dotted red; */
+	outline-color: orange;
+	border: 2px dotted red; 
 	padding: 2px;
 	padding-left: 10px;
 	margin-bottom: 0px;

@@ -241,6 +241,7 @@ $("#enemies").on("click", "button", function(){
 	console.log("Button clicked");
 
 	//move enemies to defender only if defender section is empty
+	if(isDefeated === false){
 	if ($("#defender").children().length === 0) {
 		if($(this).hasClass("enemies")){
 			console.log("An enemy has been clicked!");
@@ -253,6 +254,7 @@ $("#enemies").on("click", "button", function(){
 	else{
 		$("#message").html("You have already chosen an enemy. Click attack to play");
 	}
+}
 
 	console.log("I'm at end of on click");
 

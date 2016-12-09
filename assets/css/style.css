@@ -15,6 +15,7 @@ h1{
 	color:  #cc3300;
 	text-align: center;
 	font-family: 'Bungee', cursive;
+	padding: 10px;
 }
 h2{
 	font-size: 26px;
@@ -53,16 +54,17 @@ h2{
 
 /* Debugging */
 div {
-	outline-color: orange;
-	border: 2px dotted red; 
+	/* outline-color: orange;
+	border: 2px dotted red;  */
 	padding: 2px;
 	padding-left: 10px;
 	margin-bottom: 0px;
 }
 
+/* Responsive style */
 @media screen and (max-width: 640px){
 	div{
 		padding: 20px;
-		border: 2px dotted green;
+		/* border: 2px dotted green; */
 	}
 }
